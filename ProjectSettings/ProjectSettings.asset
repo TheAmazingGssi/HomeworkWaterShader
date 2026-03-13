@@ -922,10 +922,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 913d75b2-b45c-419f-9c4d-8378e4aabf1e
+  cloudProjectId: 32dfa13e-f66e-4293-975b-543b0e38e403
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Homework Water Shader
+  projectName: HomeworkRain
   organizationId: gssi
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

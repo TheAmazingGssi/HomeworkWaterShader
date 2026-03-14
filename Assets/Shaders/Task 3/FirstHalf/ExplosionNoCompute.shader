@@ -3,7 +3,7 @@
 
 // Notes: each section is annotated; geometry stage has detailed explanations and caveats.
 
-Shader "Custom/ExplosionForCompute"
+Shader "Custom/ExplosionNoCompute"
 {
     // Properties block defines inspector-exposed parameters.
     Properties

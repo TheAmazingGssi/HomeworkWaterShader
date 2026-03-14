@@ -1,0 +1,80 @@
+#pragma kernel InitTriangles   // One-time setup: seed normals, reset state
+#pragma kernel StepExplosion   // Per-frame: integrate velocity -> offset
+
+
+struct TriangleData
+{
+    float3 normal;      
+    float3 offset;      
+    float3 velocity;    
+    float lifetime;
+};
+
+RWStructuredBuffer<TriangleData> _TriangleBuffer;
+
+StructuredBuffer<float3> _Vertices;
+StructuredBuffer<int>    _Indices; 
+
+float _DeltaTime;       
+float _Gravity;         
+float _Lifetime;
+float _InitialSpeed;    
+uint  _TriangleCount;   
+
+
+[numthreads(64, 1, 1)]
+void InitTriangles(uint3 id : SV_DispatchThreadID)
+{
+    uint triIndex = id.x;
+    if (triIndex >= _TriangleCount) return;
+
+    // Fetch the three vertex positions for this triangle.
+    uint i0 = _Indices[triIndex * 3 + 0];
+    uint i1 = _Indices[triIndex * 3 + 1];
+    uint i2 = _Indices[triIndex * 3 + 2];
+
+    float3 p0 = _Vertices[i0];
+    float3 p1 = _Vertices[i1];
+    float3 p2 = _Vertices[i2];
+
+    // Compute and normalise the face normal from the two edges.
+    // The cross product direction matches the winding order of the mesh.
+    float3 edge1 = p1 - p0;
+    float3 edge2 = p2 - p0;
+    float3 faceNormal = normalize(cross(edge1, edge2));
+
+    // Guard against degenerate (zero-area) triangles.
+    // length(cross) == 0 means colinear vertices; keep a safe default.
+    if (any(isnan(faceNormal)))
+        faceNormal = float3(0, 1, 0);
+
+    // Seed the triangle record.
+    TriangleData data;
+    data.normal   = faceNormal;
+    data.offset = float3(0, 0, 0); // starts at rest
+    data.velocity = _InitialSpeed * faceNormal; // blast impulse along face normal
+    data.lifetime = _Lifetime;
+
+    _TriangleBuffer[triIndex] = data;
+}
+
+
+[numthreads(64, 1, 1)]
+void StepExplosion(uint3 id : SV_DispatchThreadID)
+{
+    uint triIndex = id.x;
+    if (triIndex >= _TriangleCount) return;
+
+    TriangleData data = _TriangleBuffer[triIndex];
+    
+    if(data.lifetime <= 0)
+    {
+        return;
+    }
+        data.lifetime -= _DeltaTime;
+
+        data.velocity.y += _Gravity * _DeltaTime;
+        data.offset += data.velocity * _DeltaTime;
+
+        _TriangleBuffer[triIndex] = data;
+    }

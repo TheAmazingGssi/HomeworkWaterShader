@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Rainy Materia
-  m_Shader: {fileID: -6465566751694194690, guid: c5b9cbab227ee6840856ec040f7d0d40, type: 3}
+  m_Name: Lens Mat
+  m_Shader: {fileID: -6465566751694194690, guid: 8162fbf8cdc1bb2489426464b96307c3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -20,7 +20,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: _Max_FPS _Max_Specular _Min_FPS _Rain_Intensity
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -64,8 +64,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_56eb68b4522c49a1a14460d47bc595dc_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: c9ecdfc6492eacc469289779a5e37541, type: 3}
+    - _SampleTexture2D_eade4a6f26d647329b37db23d1d6adce_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: ac1627113fb32324c9fe05b968ab539a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -104,16 +104,18 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Max_FPS: 12
-    - _Max_Specular: 0.38
+    - _Max_Darkness_Divide: 1
+    - _Max_Darkness_mult: 0.448
+    - _Maximum_Refraction: 0.0294
+    - _Maximum_Speed: 0.191
     - _Metallic: 0
-    - _Min_FPS: 6
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _QueueControl: 0
     - _QueueOffset: 0
     - _Rain_Intensity: 1
+    - _Raindrop_Size: 2.41
     - _ReceiveShadows: 1
+    - _Refraction_Intensity: 0.0685
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -123,15 +125,14 @@ Material:
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
-    - _fps: 12
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &5520368090238003329
+--- !u!114 &6872428418301007393
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
